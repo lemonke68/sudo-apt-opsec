@@ -1,4 +1,4 @@
-# opsec
+# sudo apt opsec
 
 REAL sudo apt opsec linux (holy opsec reference) command to install REAL 'opsec' (those who larp).
 
