@@ -15,10 +15,13 @@ cd opsec
 `install` does two things:
 
 1. Copies the script to `/usr/local/bin/opsec` (asks for `sudo`).
-2. Appends a small `sudo` shell function to your `~/.bashrc` so that
-   `sudo apt opsec` runs the gag while every other `sudo` command passes straight through to the real `sudo`.
+2. Appends a small `sudo` shell function to your shell's rc file — `~/.zshrc`
+   if your login shell is zsh, otherwise `~/.bashrc` — so that `sudo apt opsec`
+   runs the gag while every other `sudo` command passes straight through to the
+   real `sudo`.
 
-Open a new shell (or `source ~/.bashrc`) afterwards.
+The installer prints the exact `source` command for your rc file — run it (or
+just open a new shell) to load the hook before trying `sudo apt opsec`.
 
 ## Usage
 

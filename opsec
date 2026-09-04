@@ -40,7 +40,7 @@ bar() { # fake apt download progress bar for $1
   printf '\n'
 }
 
-#  setup subcommands: `opsec install` / `opsec uninstall` 
+# setup subcommands: `opsec install` / `opsec uninstall` 
 SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
 BIN=/usr/local/bin/opsec
 HOOK_MARK="# opsec meme hook"
@@ -75,7 +75,9 @@ case "${1:-}" in
       echo "already at $BIN"
     fi
     install_hook "$RC"
-    echo "done. new shell, then: sudo apt opsec"
+    echo
+    echo "done. load the hook now:  source $RC   (or just open a new shell)"
+    echo "then:  sudo apt opsec"
     exit 0 ;;
   uninstall)
     sudo rm -f "$BIN" && echo "removed $BIN"
@@ -190,7 +192,7 @@ cat <<'ART'
 ART
 
 echo
-echo "  ${R}${BOLD}f${W}fsociety${X} ${D}//${X} ${C}opsec installed${X}"
+echo "  ${R}${BOLD}f${W}society${X} ${D}//${X} ${C}opsec installed${X}"
 echo "  ${D}OPSEC ACTIVATED.${X}"
 echo
 echo "${G}✔ opsec (1.0.0-tiktok) set up successfully.${X}"
