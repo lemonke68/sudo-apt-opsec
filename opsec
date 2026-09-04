@@ -40,19 +40,24 @@ bar() { # fake apt download progress bar for $1
   printf '\n'
 }
 
-# setup subcommands: `opsec install` / `opsec uninstall`
+#  setup subcommands: `opsec install` / `opsec uninstall` 
 SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
 BIN=/usr/local/bin/opsec
 HOOK_MARK="# opsec meme hook"
 
+# pick the rc file for the user's login shell
+case "$(basename "${SHELL:-bash}")" in
+  zsh) RC="$HOME/.zshrc" ;;
+  *)   RC="$HOME/.bashrc" ;;
+esac
+
 install_hook() {
-  local rc="${1:-$HOME/.bashrc}"
+  local rc="${1:-$RC}"
   if grep -qF "$HOOK_MARK" "$rc" 2>/dev/null; then
     echo "hook already in $rc"
   else
     cat >> "$rc" <<'HOOK'
 
-# opsec meme hook: `sudo apt opsec` runs the gag, everything else passes through
 sudo() {
   if [ "$1" = apt ] && [ "$2" = opsec ]; then command opsec; return; fi
   command sudo "$@"
@@ -69,12 +74,12 @@ case "${1:-}" in
     else
       echo "already at $BIN"
     fi
-    install_hook "$HOME/.bashrc"
+    install_hook "$RC"
     echo "done. new shell, then: sudo apt opsec"
     exit 0 ;;
   uninstall)
     sudo rm -f "$BIN" && echo "removed $BIN"
-    echo "note: delete the '$HOOK_MARK' block from ~/.bashrc by hand"
+    echo "note: delete the '$HOOK_MARK' block from $RC by hand"
     exit 0 ;;
   -h|--help|help)
     echo "opsec           run the gag"

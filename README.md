@@ -2,7 +2,7 @@
 
 REAL sudo apt opsec linux (holy opsec reference) command to install REAL 'opsec' (those who larp).
 
-Script works on any linux distro with bash by default (not compatible with zsh).
+Script works on any linux distro, with both bash and zsh
 
 ## Install
 
